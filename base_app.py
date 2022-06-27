@@ -73,7 +73,9 @@ def main():
 		- We want to give our clients the best services ever,improve their lifestyle.
 		- To provide good quality solutions and services to our customers.
 		- To enhance the quality of our company.
-		- To secure the good business relationship with other parties.""")
+		- To secure the good business relationship with other parties.
+		- Help establish a framework for ethical behavior.
+		- To honor all promises and commitments""")
 		st.subheader("Our Vision")
 		st.markdown("""
 		- Expanding our branches throughout the world.
