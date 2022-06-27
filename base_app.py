@@ -158,7 +158,7 @@ def main():
 		st.markdown("Solid Solutions is an innovation tech company with a key focus on creating up to date technological products designed to make light of any problem thrown our way. We are extremely passionate about giving back to the community. Strengthening Today for a Stronger Tomorrow!")
 		# You can read a markdown file from supporting resources folder
 		col1, col2, col3, col4, col5, col6 = st.columns(6)
-		img1 = Image.open("Elizabeth.jpeg")
+		img1 = Image.open("Lizzy.jpeg")
 		img2 = Image.open("Hendrick.jpg")
 		img3 = Image.open("Mokgadi.jpg")
 		img4 = Image.open("Morema.jpg")
