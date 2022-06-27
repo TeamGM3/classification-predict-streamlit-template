@@ -23,11 +23,9 @@
 """
 # Streamlit dependencies
 import streamlit as st
-import joblib
-import os
-import altair as alt
+import joblib,os
 import matplotlib.pyplot as plt
-
+from PIL import Image
 
 # Data dependencies
 import pandas as pd
@@ -45,83 +43,234 @@ sentiment = ["1", "2", "0", "-1"]
 
 
 def main():
-    """Tweet Classifier App with Streamlit """
+	"""Tweet Classifier App with Streamlit """
 
-    # Creates a main title and subheader on your page -
-    # these are static across all pages
-    st.title("Welcome to Team Gm3")
-    st.subheader("Climate change tweet classification")
+	# Creates a main title and subheader on your page -
+	# these are static across all pages
 
-    # Creating sidebar with selection box -
-    # you can create multiple pages this way
-    options = ["Introduction", "Information", "EDA",
-               "Model prediction", "Model evaluation", ]
-    selection = st.sidebar.selectbox("Choose Option", options)
+	# Creating sidebar with selection box -
+	# you can create multiple pages this way
+	
+	options = ["Home", "About", "Exploratory Data Analysis", "Model", "Contact Us"]
+	selection = st.sidebar.selectbox("",options)
 
-    # Building out the "Information" page
-    if selection == "Information":
-        st.info("General Information")
-        # You can read a markdown file from supporting resources folder
-        st.markdown("""Many companies are built around lessening one’s environmental impact or carbon footprint. They offer products and services
-         that are environmentally friendly and sustainable, in line with their values and ideals. They would like to determine how people perceive
-         climate change and whether or not they believe it is a real threat. This would add to their market research efforts in gauging how their
-         product/service may be received.With this context, EDSA is challenging you during the Classification Sprint with the task of creating a
-         Machine Learning model that is able to classify whether or not a person believes in climate change, based on their novel tweet data.Providing
-         an accurate and robust solution to this task gives companies access to a broad base of consumer sentiment, spanning multiple demographic and geographic
-          categories - thus increasing their insights and informing future marketing strategies. """)
+	# Building out the "About" page
+	if selection == "About":
+		st.title("About")
 
-        st.subheader("Raw Twitter data and label")
-        if st.checkbox('Show raw data'):  # data is hidden if box is unchecked
-            # will write the df to the page
-            st.write(raw[['sentiment', 'message']])
+		logo = Image.open('logo.jpg')
+		st.sidebar.image(logo, use_column_width=True)
 
-    if selection == "EDA":
-        st.subheader("Sentiment type vs Count bar chart")
-        sentiment_type = st.multiselect(
-            "Which sentiment would you like to see?", sentiment)
-        st.write("  Sentiment type vs Count bar chart")
-        source = pd.DataFrame({'Count': [8530, 3640, 2353, 1296],
-                               'Sentiment': ["1", "2", "0", "-1"]})
+		# You can read a markdown file from supporting resources folder
+		st.subheader("Background")
+		st.markdown("Many companies are built around lessening one’s environmental impact or carbon footprint. They offer products and services that are environmentally friendly and sustainable, in line with their values and ideals. They would like to determine how people perceive climate change and whether or not they believe it is a real threat. This would add to their market research efforts in gauging how their product/service may be received. ")
+		st.subheader("Our Values")
+		st.markdown("""
+		- We believe with the experience that we have, we can do more,as we are the best and nothing less.
+	    - We provide our clients with the best predictions of their database system.""")
+		st.subheader("Our Aims")
+		st.markdown("""
+		- We want to give our clients the best services ever,improve their lifestyle.
+		- To provide good quality solutions and services to our customers.
+		- To enhance the quality of our company.
+		- To secure the good business relationship with other parties.""")
+		st.subheader("Our Vision")
+		st.markdown("""
+		- Expanding our branches throughout the world.
+		- Help define performance standards.
+		- Help establish a framework for ethical behavior
+		""")
 
-        bar_chart = alt.Chart(source).mark_bar().encode(
-            y='Count:Q',
-            x='Sentiment:O',
-        )
-        st.altair_chart(bar_chart, use_container_width=True)
+	# Building out the "Exploratory Data Analysis" page
+	if selection == "Exploratory Data Analysis":
+		st.title("Exploratory Data Analysis")
 
-        st.subheader("Pie chart distribution of sentiments in percentage")
-        labels = "1", "2", "0", "-1"
-        sizes = [8530, 3640, 2353, 1296]
-        #explode = (0.1, 0.1, 0.1, 0.1)
+		logo = Image.open('logo.jpg')
+		st.sidebar.image(logo, use_column_width=True)
 
-        fig1, ax1 = plt.subplots()
-        ax1.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=False,
-                startangle=90)
-        ax1.axis('equal')
+		st.subheader("Sentiments")
+		# You can read a markdown file from supporting resources folder
+		st.markdown("2 = News : Tweets linked to factual news about climate change.")
+		st.markdown("1 = Pro : Tweets that support the belief of man-made climate change.")
+		st.markdown("0 = Neutral : Tweets that neither support nor refuse beliefs of climate change.")
+		st.markdown("-1 = Anti : Tweets that do not support the belief of man-made climate change.")
 
-        st.pyplot(fig1)
+		st.subheader("Pie chart distribution of sentiments in percentage")
+        
+		labels = 'Pro', 'News', 'Neutral', 'Anti'
+		sizes = [8530, 3640, 2353, 1296]
+		explode = (0, 0, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 
-        # Building out the predication page
-    if selection == "Prediction":
-        st.info("Prediction with ML Models")
-        # Creating a text box for user input
-        tweet_text = st.text_area("Enter Text", "Type Here")
+		fig1, ax1 = plt.subplots()
+		ax1.pie(sizes, explode=explode, labels=labels, autopct='%0.1f%%',
+        shadow=True, startangle=90)
+		ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
-        if st.button("Classify"):
-            # Transforming user input with vectorizer
-            vect_text = tweet_cv.transform([tweet_text]).toarray()
-            # Load your .pkl file with the model of your choice + make predictions
-            # Try loading in multiple models to give the user a choice
-            predictor = joblib.load(
-                open(os.path.join("resources/Logistic_regression.pkl"), "rb"))
-            prediction = predictor.predict(vect_text)
+		st.pyplot(fig1)
 
-            # When model has successfully run, will print prediction
-            # You can use a dictionary or similar structure to make this output
-            # more human interpretable.
-            st.success("Text Categorized as: {}".format(prediction))
+	# Building out the "Model" page
+	if selection == "Model":
+		st.title("Model")
+
+		logo = Image.open('logo.jpg')
+		st.sidebar.image(logo, use_column_width=True)
+
+		st.subheader("What is Logistic Regression?")
+		# You can read a markdown file from supporting resources folder
+		st.markdown("Logistic regression estimates the probability of an event occurring, such as voted or didn’t vote, based on a given dataset of independent variables. It is often used for classification and predictive analytics. ")
+		st.markdown("There are algebraically equivalent ways to write the logistic regression model:")
+		st.markdown("The first is")
+		st.latex(r'''
+		P(X) = \displaystyle \frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}}
+     	''')
+		st.markdown("which is an equation that describes the odds of being in the current category of interest. By definition, the odds for an event is π / (1 - π) such that P is the probability of the event.")
+		st.markdown("The second is")
+		st.latex(r'''
+		\begin{align}
+		1 - P(X) &= \displaystyle \frac{1}{1+e^{\beta_0 + \beta_1 X}} \\
+		\therefore \log \left( \frac{P(X)}{1-P(X)} \right) &= {\beta_0 + \beta_1 X}
+		\end{align}
+     	''')
+		st.markdown("which states that the (natural) logarithm of the odds is a linear function of the X variables (and is often called the log odds). This is also referred to as the logit transformation of the probability of success, π.")
+		st.subheader("Types of Logistic Regression")
+		st.markdown("- Binary logistic regression")
+		st.markdown("- Multinomial logistic regression")
+		st.markdown("- Ordinal logistic regression")
+		st.subheader("Advantages")
+		st.markdown("- Logistic regression is much easier to implement than other methods, especially in the context of machine learning.")
+		st.markdown("- Logistic regression works well for cases where the dataset is linearly separable.")
+		st.markdown("- Logistic regression provides useful insights.")
+		st.subheader("Disadvantages")
+		st.markdown("- Logistic regression fails to predict a continuous outcome.")
+		st.markdown("- Logistic regression assumes linearity between the predicted (dependent) variable and the predictor (independent) variables.")
+		st.markdown("- Logistic regression may not be accurate if the sample size is too small.")
+
+	# Building out the "Contact Us" page
+	if selection == "Contact Us":
+		st.title("Contact Us")
+
+		logo = Image.open('logo.jpg')
+		st.sidebar.image(logo, use_column_width=True)
+		
+		st.subheader("Our Company")
+		st.markdown("Solid Solutions is an innovation tech company with a key focus on creating up to date technological products designed to make light of any problem thrown our way. We are extremely passionate about giving back to the community. Strengthening Today for a Stronger Tomorrow!")
+		# You can read a markdown file from supporting resources folder
+		col1, col2, col3, col4, col5, col6 = st.columns(6)
+		img1 = Image.open("Robyn1.jpg")
+		img2 = Image.open("Hendrick.jpg")
+		img3 = Image.open("Mokgadi.jpg")
+		img4 = Image.open("Morema.jpg")
+		img5 = Image.open("Njabulo.jpg")
+		img6 = Image.open("Robyn1.jpg")
+		
+		with col1:
+			st.caption("Market Technologist")
+			st.image(img1)
+			st.caption("Elizabeth Matlala")
+
+		with col2:
+			st.caption("Software Developer")
+			st.image(img2)
+			st.caption("Hendrick Makau")
+
+		with col3:
+			st.caption("CEO")
+			st.image(img3)
+			st.caption("Mokgadi Makgothoma")
+
+		with col4:
+			st.caption("Full-stack Developer")
+			st.image(img4)
+			st.caption("Morema Moloisi")
+
+		with col5:
+			st.caption("Information Architect")
+			st.image(img5)
+			st.caption("Njabulo Mudau")
+
+		with col6:
+			st.caption("UI/UX Designer")
+			st.image(img6)
+			st.caption("Robyn van der Merwe")
+			
+
+		st.subheader("Message Us")
+		with st.form("form", clear_on_submit=True):
+			name = st.text_input("Enter Full Name")
+			email = st.text_input("Enter Email Address")
+			message = st.text_area("Message")
+
+			submit = st.form_submit_button("Submit")
+
+		col1, col2, col3 = st.columns(3)
+		with col1:
+			st.subheader("Address")
+			img = Image.open("map.png")
+			st.image(img)
+			st.markdown("1004 Otto du Plesis")
+			st.markdown("Cape Town")
+			st.markdown("8001")
+
+		with col2:
+			st.subheader("Phone")
+			st.markdown("Monday - Friday")
+			st.markdown("08h00 - 17h00 GMT+2")
+			st.markdown("(+27) 021 554 1091")
+			st.markdown("(+27) 084 553 4721")
+
+		with col3:
+			st.subheader("Email")
+			st.markdown("robynvandermerwe@gmail.com")
+			st.markdown("robynvandermerwe@yahoo.com")
 
 
-# Required to let Streamlit instantiate our web app.
+	# Building out the Home page
+	if selection == "Home":
+		st.title("Tweet Classifer")
+
+		option = st.sidebar.multiselect(
+     	'Sentiment:',
+     	('Pro', 'News', 'Neutral', 'Anti'))
+
+		tweet = st.sidebar.radio(
+     	"Tweet:",
+     	('All', 'Original', 'Re-Tweet'))
+		if tweet == 'All':
+			st.write('You selected All tweets.')
+
+		if tweet == 'Original':
+			st.write('You selected Original tweets.')
+
+		if tweet == 'Re-Tweet':
+			st.write('You selected Re-Tweets.')
+
+		container = st.container()
+		container.write("")
+		
+		logo = Image.open('logo.jpg')
+		st.sidebar.image(logo, use_column_width=True)
+		
+		st.info("Prediction with ML Models")
+		# Creating a text box for user input
+		tweet_text = st.text_area("Enter Text","Type Here")
+
+		if st.button("Classify"):
+			# Transforming user input with vectorizer
+			vect_text = tweet_cv.transform([tweet_text]).toarray()
+			# Load your .pkl file with the model of your choice + make predictions
+			# Try loading in multiple models to give the user a choice
+			predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+			prediction = predictor.predict(vect_text)
+
+			# When model has successfully run, will print prediction
+			# You can use a dictionary or similar structure to make this output
+			# more human interpretable.
+			st.success("Text Categorized as: {}".format(prediction))
+
+		st.subheader("Raw Twitter data and label")
+		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
+			st.write(raw[['sentiment', 'message']]) # will write the df to the page
+
+# Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
     main()
