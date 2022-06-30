@@ -33,8 +33,8 @@ import re
 import string
 import nltk
 #nltk.download()
-from nltk.tokenize import TreebankWordTokenizer
-from nltk.stem import WordNetLemmatizer
+#from nltk.tokenize import TreebankWordTokenizer
+#from nltk.stem import WordNetLemmatizer
 #from nltk.corpus import stopwords
 #stop_words = set(stopwords.words('english'))
 from sklearn.feature_extraction.text import CountVectorizer
@@ -97,17 +97,17 @@ clean_news = clean[clean['sentiment'] == 2]
 def remove_punctuation(tweet):
     return ''.join([l for l in tweet if l not in string.punctuation])
 
-tokeniser = TreebankWordTokenizer()
+#tokeniser = TreebankWordTokenizer()
 
-lemmatizer = WordNetLemmatizer()
+#lemmatizer = WordNetLemmatizer()
 
-def df_copy_lemma(words, lemmatizer):
-    return [lemmatizer.lemmatize(word) for word in words]
+#def df_copy_lemma(words, lemmatizer):
+    #return [lemmatizer.lemmatize(word) for word in words]
 
-def remove_stop_words(tokens):    
-    return [t for t in tokens if t not in stopwords.words('english')]
+#def remove_stop_words(tokens):    
+    #return [t for t in tokens if t not in stopwords.words('english')]
 
-vectorizer = CountVectorizer(ngram_range = (1,2))
+#vectorizer = CountVectorizer(ngram_range = (1,2))
 
 # The main function where we will build the actual app
 def main():
@@ -353,9 +353,9 @@ def main():
     	
 			user_input_cleaned = ' '.join([word for word in user_input_cleaned.split() if word.isalpha()])
     	
-			lemmatizer = WordNetLemmatizer()
+			#lemmatizer = WordNetLemmatizer()
     	
-			user_input_cleaned = ' '.join([lemmatizer.lemmatize(word) for word in user_input_cleaned.split()])
+			#user_input_cleaned = ' '.join([lemmatizer.lemmatize(word) for word in user_input_cleaned.split()])
 
 			user_input = [user_input_cleaned]
 			
