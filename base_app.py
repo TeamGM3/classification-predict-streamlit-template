@@ -26,11 +26,7 @@ import streamlit as st
 import joblib,os
 import matplotlib.pyplot as plt
 from PIL import Image
-<<<<<<< HEAD
-
-=======
 from textblob import TextBlob
->>>>>>> Robyn
 # Data dependencies
 import pandas as pd
 import numpy as np
@@ -124,68 +120,6 @@ def main():
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-<<<<<<< HEAD
-	
-	options = ["Home", "About", "Exploratory Data Analysis", "Model", "Contact Us"]
-	selection = st.sidebar.selectbox("",options)
-
-	# Building out the "About" page
-	if selection == "About":
-		st.title("About")
-
-		logo = Image.open('logo.jpg')
-		st.sidebar.image(logo, use_column_width=True)
-
-		# You can read a markdown file from supporting resources folder
-		st.subheader("Background")
-		st.markdown("Many companies are built around lessening one’s environmental impact or carbon footprint. They offer products and services that are environmentally friendly and sustainable, in line with their values and ideals. They would like to determine how people perceive climate change and whether or not they believe it is a real threat. This would add to their market research efforts in gauging how their product/service may be received. ")
-		st.subheader("Our Values")
-		st.markdown("""
-		- We believe with the experience that we have, we can do more,as we are the best and nothing less.
-	    - We provide our clients with the best predictions of their database system.""")
-		st.subheader("Our Aims")
-		st.markdown("""
-		- We want to give our clients the best services ever,improve their lifestyle.
-		- To provide good quality solutions and services to our customers.
-		- To enhance the quality of our company.
-		- To secure the good business relationship with other parties.
-		- Help establish a framework for ethical behavior.
-		- To honor all promises and commitments""")
-		st.subheader("Our Vision")
-		st.markdown("""
-		- Expanding our branches throughout the world.
-		- Help define performance standards.
-		- Help establish a framework for ethical behavior
-		""")
-
-	# Building out the "Exploratory Data Analysis" page
-	if selection == "Exploratory Data Analysis":
-		st.title("Exploratory Data Analysis")
-
-		logo = Image.open('logo.jpg')
-		st.sidebar.image(logo, use_column_width=True)
-
-		st.subheader("Sentiments")
-		# You can read a markdown file from supporting resources folder
-		st.markdown("2 = News : Tweets linked to factual news about climate change.")
-		st.markdown("1 = Pro : Tweets that support the belief of man-made climate change.")
-		st.markdown("0 = Neutral : Tweets that neither support nor refuse beliefs of climate change.")
-		st.markdown("-1 = Anti : Tweets that do not support the belief of man-made climate change.")
-
-		st.subheader("Pie chart distribution of sentiments in percentage")
-        
-		labels = 'Pro', 'News', 'Neutral', 'Anti'
-		sizes = [8530, 3640, 2353, 1296]
-		explode = (0, 0, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
-		fig1, ax1 = plt.subplots()
-		ax1.pie(sizes, explode=explode, labels=labels, autopct='%0.1f%%',
-        shadow=True, startangle=90)
-		ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-		st.pyplot(fig1)
-
-=======
 	st.set_page_config(page_title='Tweetzilla', page_icon='🐤')
 	
 
@@ -252,16 +186,11 @@ def main():
 		haspic = Image.open('resources/Hashpic.png')
 		st.image(haspic)
 
->>>>>>> Robyn
 	# Building out the "Model" page
 	if selection == "Model":
 		st.title("Model")
 
-<<<<<<< HEAD
-		logo = Image.open('logo.jpg')
-=======
 		logo = Image.open('resources/Logo1-removebg-preview.png')
->>>>>>> Robyn
 		st.sidebar.image(logo, use_column_width=True)
 
 		st.subheader("What is Logistic Regression?")
@@ -298,41 +227,24 @@ def main():
 	if selection == "Contact Us":
 		st.title("Contact Us")
 
-<<<<<<< HEAD
-		logo = Image.open('logo.jpg')
-=======
 		logo = Image.open('resources/Logo1-removebg-preview.png')
->>>>>>> Robyn
 		st.sidebar.image(logo, use_column_width=True)
 		
 		st.subheader("Our Company")
 		st.markdown("Solid Solutions is an innovation tech company with a key focus on creating up to date technological products designed to make light of any problem thrown our way. We are extremely passionate about giving back to the community. Strengthening Today for a Stronger Tomorrow!")
 		# You can read a markdown file from supporting resources folder
 		col1, col2, col3, col4, col5, col6 = st.columns(6)
-<<<<<<< HEAD
-		img1 = Image.open("Lizzy.jpeg")
-		img2 = Image.open("Hendrick.jpg")
-		img3 = Image.open("Mokgadi.jpg")
-		img4 = Image.open("Morema.jpg")
-		img5 = Image.open("Njabulo.jpg")
-		img6 = Image.open("Robyn.jpeg")
-=======
 		img1 = Image.open("resources/Lizzy.jpeg")
 		img2 = Image.open("resources/Hendrick.jpg")
 		img3 = Image.open("resources/Mokgadi.jpg")
 		img4 = Image.open("resources/Morema.jpg")
 		img5 = Image.open("resources/Njabulo.jpg")
 		img6 = Image.open("resources/Robyn.jpeg")
->>>>>>> Robyn
 		
 		with col1:
 			st.caption("Market Technologist")
 			st.image(img1)
-<<<<<<< HEAD
-			st.caption("Elizabeth Matlala")
-=======
 			st.caption("Elizabeth Pata Matlala")
->>>>>>> Robyn
 
 		with col2:
 			st.caption("Software Developer")
@@ -342,11 +254,7 @@ def main():
 		with col3:
 			st.caption("CEO")
 			st.image(img3)
-<<<<<<< HEAD
-			st.caption("Mokgadi Makgothoma")
-=======
 			st.caption("Mokgadi Precious Makgothoma")
->>>>>>> Robyn
 
 		with col4:
 			st.caption("Full-stack Developer")
@@ -375,15 +283,9 @@ def main():
 		col1, col2, col3 = st.columns(3)
 		with col1:
 			st.subheader("Address")
-<<<<<<< HEAD
-			img = Image.open("map.png")
-			st.image(img)
-			st.markdown("1004 Otto du Plesis")
-=======
 			img = Image.open("resources/map.png")
 			st.image(img)
 			st.markdown("106 Loop")
->>>>>>> Robyn
 			st.markdown("Cape Town")
 			st.markdown("8001")
 
@@ -392,71 +294,16 @@ def main():
 			st.markdown("Monday - Friday")
 			st.markdown("08h00 - 17h00 GMT+2")
 			st.markdown("(+27) 021 554 1091")
-<<<<<<< HEAD
-			st.markdown("(+27) 084 553 4721")
-
-		with col3:
-			st.subheader("Email")
-			st.markdown("robynvandermerwe@gmail.com")
-			st.markdown("robynvandermerwe@yahoo.com")
-=======
 			st.markdown("(+27) 081 579 4965")
 
 		with col3:
 			st.subheader("Email")
 			st.markdown("robyn@agrotech.com")
 			st.markdown("morema@agrotech.com")
->>>>>>> Robyn
 
 
 	# Building out the Home page
 	if selection == "Home":
-<<<<<<< HEAD
-		st.title("Tweet Classifer")
-
-		option = st.sidebar.multiselect(
-     	'Sentiment:',
-     	('Pro', 'News', 'Neutral', 'Anti'))
-
-		tweet = st.sidebar.radio(
-     	"Tweet:",
-     	('All', 'Original', 'Re-Tweet'))
-		if tweet == 'All':
-			st.write('You selected All tweets.')
-
-		if tweet == 'Original':
-			st.write('You selected Original tweets.')
-
-		if tweet == 'Re-Tweet':
-			st.write('You selected Re-Tweets.')
-
-		container = st.container()
-		container.write("")
-		
-		logo = Image.open('logo.jpg')
-		st.sidebar.image(logo, use_column_width=True)
-		
-		st.info("Prediction with ML Models")
-		# Creating a text box for user input
-		tweet_text = st.text_area("Enter Text","Type Here")
-
-		if st.button("Classify"):
-			# Transforming user input with vectorizer
-			vect_text = tweet_cv.transform([tweet_text]).toarray()
-			# Load your .pkl file with the model of your choice + make predictions
-			# Try loading in multiple models to give the user a choice
-			predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
-			prediction = predictor.predict(vect_text)
-
-			# When model has successfully run, will print prediction
-			# You can use a dictionary or similar structure to make this output
-			# more human interpretable.
-			st.success("Text Categorized as: {}".format(prediction))
-
-		st.subheader("Raw Twitter data and label")
-		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
-			st.write(raw[['sentiment', 'message']]) # will write the df to the page
-=======
 		st.title("🐤 TWEETZILLA")
 
 		col1,col2 = st.columns(2)
@@ -607,7 +454,6 @@ def main():
 		
 		logo = Image.open('resources/Logo1-removebg-preview.png')
 		st.sidebar.image(logo)
->>>>>>> Robyn
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
