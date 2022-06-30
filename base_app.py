@@ -38,7 +38,6 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
 from sklearn.feature_extraction.text import CountVectorizer
-from wordcloud import WordCloud
 FILE = os.path.dirname(__file__)
 #STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
 
