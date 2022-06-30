@@ -26,7 +26,6 @@ import streamlit as st
 import joblib,os
 import matplotlib.pyplot as plt
 from PIL import Image
-from textblob import TextBlob
 # Data dependencies
 import pandas as pd
 import numpy as np
