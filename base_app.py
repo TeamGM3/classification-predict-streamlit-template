@@ -35,8 +35,8 @@ import nltk
 #nltk.download()
 from nltk.tokenize import TreebankWordTokenizer
 from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
-stop_words = set(stopwords.words('english'))
+#from nltk.corpus import stopwords
+#stop_words = set(stopwords.words('english'))
 from sklearn.feature_extraction.text import CountVectorizer
 FILE = os.path.dirname(__file__)
 #STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
@@ -349,7 +349,7 @@ def main():
     	
 			user_input_cleaned = user_input_cleaned.replace(r'[^\w\s]', '')
     	
-			user_input_cleaned = ' '.join([word for word in user_input_cleaned.split() if word not in (stop_words)])
+			#user_input_cleaned = ' '.join([word for word in user_input_cleaned.split() if word not in (stop_words)])
     	
 			user_input_cleaned = ' '.join([word for word in user_input_cleaned.split() if word.isalpha()])
     	
